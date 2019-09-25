@@ -1,0 +1,49 @@
+
+/Gradleメモ
+implementation,apiとcompile
+	現状Gradleでcompileの利用は非推奨
+	implementationかapiを使えとのこと
+	implementationの場合依存関係が伝搬しないのでモジュールの依存関係のスコープが該当PJだけになる
+	詳細は下記
+	https://qiita.com/opengl-8080/items/6ad642e0b016465891de
+
+プロキシの設定
+	HTTP
+	systemProp.http.proxyHost=<プロキシホスト名>
+	systemProp.http.proxyPort=<プロキシポート番号>
+	HTTPS
+	systemProp.https.proxyHost=<プロキシホスト名>
+	systemProp.https.proxyPort=<プロキシポート番号>
+
+Javacのコンパイルオプション
+	compileJava {
+	    options.encoding = 'Shift_JIS'
+	}
+	compileJavaの中でoptions.～～で指定
+	詳細は下記
+	http://gradle.monochromeroad.com/docs/dsl/org.gradle.api.tasks.compile.CompileOptions.html
+	Javacの-source, -targetのオプションは下記のように指定する
+	sourceCompatibility = '1.6' // -source
+	targetCompatibility = '1.6' // -target
+
+
+
+〇Springメモ
+<html xmlns:th="http://www.thymeleaf.org">
+thymeleafを使うのに必要
+
+@RequestParam
+画面の入力内容を取得するときに使う
+htmlのname属性が対応
+
+Springにおけるサーバ側は
+Controller→Service→Repository
+
+ライフサイクル管理
+@Scope("")でクラスのライフサイクルを管理する
+singleton：起動時に1つ作り使いまわす
+prototype：Beanを取得するたびにNewする
+session：HTTPのセッション単位で使いまわす
+request：HTTPのリクエスト単位で使いまわす
+application：サーブレットのコンテキスト単位で使いまわす
+
