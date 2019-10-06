@@ -22,7 +22,7 @@ public class UserServiceTest {
 	private UserService service;
 	
 	@MockBean
-	@Qualifier("UserDaoResultSetImpl")
+	@Qualifier("UserDaoImpl")
 	UserDao dao;
 	
 	@ParameterizedTest

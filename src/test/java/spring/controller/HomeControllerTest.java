@@ -19,7 +19,7 @@ import spring.dto.Employee;
 import spring.service.HelloService;
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(spring.controller.HelloController.class)
+@WebMvcTest(controllers = spring.controller.HelloController.class, secure = false)
 public class HomeControllerTest {
 	
 	@Autowired
@@ -29,6 +29,7 @@ public class HomeControllerTest {
 	private HelloService service;
 	
 	@Test
+	//@WithMockUser
 	public void sample1() throws Exception {
 		Employee mock = new Employee();
 		mock.setEmployee_id(1);

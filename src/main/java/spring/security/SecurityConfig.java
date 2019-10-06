@@ -26,6 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 	
 	@Autowired
+	//@Autowired(required = false)
 	private DataSource dataSource;
 	
 	private static final String USER_SQL = 
