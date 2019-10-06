@@ -1,8 +1,12 @@
 package spring.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import spring.dto.SignupForm;
 import spring.dto.User;
+import spring.repository.UserRowCallbackHandler;
 import spring.service.UserService;
 
 @Controller
@@ -98,7 +103,19 @@ public class HomeController {
 	}
 	
 	@GetMapping("/userList/csv")
-	public String getUserListCsv(Model model) {
-		return getuserList(model);
+	public ResponseEntity<byte[]> getUserListCsv(Model model) {
+		userService.userCsvOut();
+		byte[] csv = null;
+		
+		try {
+			csv = userService.getFile(UserRowCallbackHandler.FILE_NAME);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		HttpHeaders header = new HttpHeaders();
+		header.add("Content-Type", "text/csv; charset=UTF-8");
+		header.setContentDispositionFormData("filename", UserRowCallbackHandler.FILE_NAME);
+		return new ResponseEntity<byte[]>(csv, header, HttpStatus.OK);
 	}
 }

@@ -1,0 +1,50 @@
+@ExtendWith(SpringExtension.class)
+@SpringBootTest
+@Transactional
+public class UserDaoImplTest {
+	
+	@Autowired
+	@Qualifier("UserDaoImpl")
+	private UserDao dao;
+	
+	@Test
+	@Sql("/sql/spring/repository/UserDaoImpl/test_count_exp_0count.sql")
+	public void test_count_exp_0count() {
+		System.out.println(dao.selectMany());
+		assertEquals(dao.count(), 0);
+	}
+	
+	@Test
+	@Sql("/sql/spring/repository/UserDaoImpl/test_count_exp_2count.sql")
+	public void test_count_exp_2count() {
+		System.out.println(dao.selectMany());
+		assertEquals(dao.count(), 2);
+	}
+}
+
+@ExtendWith(SpringExtension.class)
+@SpringBootTest
+
+JUnit5でテストをするためのお作法
+ないとGradleとかでテストできない
+
+
+@Transactional
+
+テスト用SQLファイルの実行をロールバックするのに必要
+つけないと実行したSQLファイルの実行結果が次のテストにそのまま残り続ける
+
+
+@Autowired
+@Qualifier("UserDaoImpl")
+private UserDao dao;
+
+テスト	対象のDAO
+特別なモックは不要
+
+
+@Test
+@Sql("/sql/spring/repository/UserDaoImpl/test_count_exp_0count.sql")
+
+test/resources以下のファイルを参照できる
+テスト用のSQLを実行する
