@@ -118,4 +118,10 @@ public class HomeController {
 		header.setContentDispositionFormData("filename", UserRowCallbackHandler.FILE_NAME);
 		return new ResponseEntity<byte[]>(csv, header, HttpStatus.OK);
 	}
+	
+	@GetMapping("/admin")
+	public String getAdmin(Model model) {
+		model.addAttribute("contents", "login/admin::admin_contents");
+		return "login/homeLayout";
+	}
 }

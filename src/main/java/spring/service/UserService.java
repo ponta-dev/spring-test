@@ -24,9 +24,10 @@ import spring.repository.UserDao;
 @Transactional
 public class UserService {
 	@Autowired
+	@Qualifier("UserDaoImpl")
 	//@Qualifier("UserDaoMapImpl")
 	//@Qualifier("UserDaoPropMapImpl")
-	@Qualifier("UserDaoResultSetImpl")
+	//@Qualifier("UserDaoResultSetImpl")
 	UserDao dao;
 	
 	public boolean insert(User user) {

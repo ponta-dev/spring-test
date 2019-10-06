@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import spring.dto.User;
@@ -17,6 +18,9 @@ public class UserDaoImpl implements UserDao {
 
 	@Autowired
 	JdbcTemplate jdbc;
+	
+	@Autowired
+	PasswordEncoder passwordEncoder;
 	
 	@Override
 	public int count() throws DataAccessException {
@@ -38,7 +42,8 @@ public class UserDaoImpl implements UserDao {
 				+ "role"
 				+ ") values (?,?,?,?,?,?,?)"
 				, user.getUserId()
-				, user.getPassword()
+				, passwordEncoder.encode(user.getPassword())
+				//, user.getPassword()
 				, user.getUserName()
 				, user.getBirthday()
 				, user.getAge()
@@ -79,7 +84,8 @@ public class UserDaoImpl implements UserDao {
 				+ " age = ?,"
 				+ " marriage = ?"
 				+ " where user_id = ?"
-				,user.getPassword()
+				,passwordEncoder.encode(user.getPassword())
+				//,user.getPassword()
 				,user.getUserName()
 				,user.getBirthday()
 				,user.getAge()

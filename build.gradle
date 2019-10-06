@@ -31,6 +31,7 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-thymeleaf:${spring_boot_version}"
     implementation "org.webjars:jquery:${webjars_jquery_version}"
     implementation "org.webjars:bootstrap:${webjars_bootstrap_version}"
+    
     //aop
     implementation "org.springframework:spring-aop:${spring_version}"
     implementation "org.aspectj:aspectjweaver:${aspectj_version}"
@@ -40,13 +41,17 @@ dependencies {
 	annotationProcessor "org.projectlombok:lombok:${lombok_version}"
 	implementation "org.projectlombok:lombok:${lombok_version}"
 	implementation "org.springframework.boot:spring-boot-starter-actuator:${spring_boot_version}"
+	
 	// security
-	//implementation "org.springframework.boot:spring-boot-starter-security:${spring_boot_version}"
+	implementation "org.springframework.boot:spring-boot-starter-security:${spring_boot_version}"
+	implementation "org.thymeleaf.extras:thymeleaf-extras-springsecurity5:${thymeleaf_security_version}"
+	
 	// sql
 	implementation "org.springframework.boot:spring-boot-starter-jdbc:${spring_boot_version}"
 	implementation "org.springframework.boot:spring-boot-starter-data-jpa:${spring_boot_version}"
 	//runtime "org.postgresql:postgresql:${postgresql_jdbc_version}"
 	runtime "com.h2database:h2:${h2_jdbc_version}"
+	
 	// test
 	testImplementation "org.springframework.boot:spring-boot-starter-test:${spring_boot_version}"
 	testAnnotationProcessor "org.projectlombok:lombok:${lombok_version}"
@@ -54,7 +59,7 @@ dependencies {
 	testImplementation "org.junit.jupiter:junit-jupiter-api:${junit_version}"
 	testImplementation "org.junit.jupiter:junit-jupiter-params:${junit_version}"
 	testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junit_version}"
-	//testImplementation "org.springframework.security:spring-security-test:${spring_version}"
+	testImplementation "org.springframework.security:spring-security-test:${spring_version}"
 }
 
 test {
